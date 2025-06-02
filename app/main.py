@@ -6,7 +6,7 @@ from .controllers import (
     contabilidad_controller,
     colaboradores_controller,
     citas_controller,
-    consultas_controller
+    consultas_controller, certificados_controller
 )
 
 Base.metadata.create_all(bind=engine)
@@ -19,6 +19,7 @@ app.include_router(contabilidad_controller.router)
 app.include_router(colaboradores_controller.router)
 app.include_router(citas_controller.router)
 app.include_router(consultas_controller.router)
+app.include_router(certificados_controller.router)
 
 
 @app.get("/")
