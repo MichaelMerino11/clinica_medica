@@ -1,6 +1,6 @@
+from app.database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from app.database import Base
 
 class Paciente(Base):
     __tablename__ = "pacientes"
@@ -9,7 +9,9 @@ class Paciente(Base):
     nombre = Column(String)
     cedula = Column(String, unique=True)
     telefono = Column(String)
-    email = Column(String)
+    email = Column(String, nullable=True)
+
+    facturacion_terceros = relationship("FacturacionTerceros", back_populates="paciente")
 
 class FacturacionTerceros(Base):
     __tablename__ = "facturacion_terceros"
@@ -19,4 +21,5 @@ class FacturacionTerceros(Base):
     nombre = Column(String)
     ruc = Column(String)
     direccion = Column(String)
-    paciente = relationship("Paciente")
+    
+    paciente = relationship("Paciente", back_populates="facturacion_terceros")
